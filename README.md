@@ -133,7 +133,7 @@ Alle Skripte installieren alle notwendigen Komponenten einschließlich Apache2, 
 
 1. **Skript herunterladen**:
    ```bash
-   wget https://raw.githubusercontent.com/your-repo/phpmyadmin8_4.sh
+   git clone https://github.com/M3ronStudioTV/Debian12bashfiles.git
    ```
 
 2. **Ausführungsberechtigung erteilen**:
