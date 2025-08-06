@@ -5,7 +5,7 @@
 ### Vor der Installation
 - **Vollständige Deinstallation erforderlich**: Wenn Sie bereits eine ältere PHP-Version installiert haben, deinstallieren Sie diese **VOLLSTÄNDIG** vor der Installation einer neuen Version
 - **Backup erstellen**: Erstellen Sie ein Backup Ihrer Datenbanken und Konfigurationen
-- **PHP 8.4 Beta-Status**: PHP 8.4 ist noch in der Entwicklung und **NICHT GETESTET** - verwenden Sie nur in Testumgebungen
+- **PHP 8.4 Beta-Status**: PHP 8.4 Script ist noch in der Entwicklung und **NICHT GETESTET** - verwenden Sie nur in Testumgebungen
 
 ### Deinstallation vorheriger Versionen
 ```bash
