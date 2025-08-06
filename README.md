@@ -247,7 +247,6 @@ Bei Problemen oder Fragen erstellen Sie bitte ein Issue im entsprechenden Reposi
 - **PHP 8.3 Changelog**: https://www.php.net/ChangeLog-8.php#8.3.0
 - **PHP 8.2 Changelog**: https://www.php.net/ChangeLog-8.php#8.2.0
 - **PHP Migration Guide**: https://www.php.net/manual/de/migration80.php
-- **PHP Performance Benchmarks**: https://www.php.net/ChangeLog-8.php#8.3.0
 
 ### phpMyAdmin
 - **Offizielle phpMyAdmin Website**: https://www.phpmyadmin.net/
