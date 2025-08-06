@@ -109,7 +109,7 @@ Alle Skripte installieren alle notwendigen Komponenten einschließlich Apache2, 
 
 3. **Skript ausführen**:
    ```bash
-   ./phpmyadmin8_2.sh
+   bash ./phpmyadmin8_2.sh
    ```
 
 ### phpmyadmin8_3.sh (PHP 8.3) - Empfohlen
