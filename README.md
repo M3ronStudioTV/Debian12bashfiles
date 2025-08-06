@@ -1,4 +1,4 @@
-# phpMyAdmin Installation Scripts
+# PhpMyAdmin Installation Scripts
 
 ## ⚠️ WICHTIGE HINWEISE
 
