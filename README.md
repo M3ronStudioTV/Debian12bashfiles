@@ -1,36 +1,56 @@
 # phpMyAdmin Installation Scripts
 
+## ⚠️ WICHTIGE HINWEISE
+
+### Vor der Installation
+- **Vollständige Deinstallation erforderlich**: Wenn Sie bereits eine ältere PHP-Version installiert haben, deinstallieren Sie diese **VOLLSTÄNDIG** vor der Installation einer neuen Version
+- **Backup erstellen**: Erstellen Sie ein Backup Ihrer Datenbanken und Konfigurationen
+- **PHP 8.4 Beta-Status**: PHP 8.4 ist noch in der Entwicklung und **NICHT GETESTET** - verwenden Sie nur in Testumgebungen
+
+### Deinstallation vorheriger Versionen
+```bash
+# PHP 8.2/8.3 vollständig entfernen
+sudo apt purge php8.2* php8.3* -y
+sudo apt autoremove -y
+sudo rm -rf /etc/php/8.2 /etc/php/8.3
+sudo rm -f /etc/apache2/conf-available/phpmyadmin.conf
+sudo rm -rf /usr/share/phpmyadmin
+sudo systemctl reload apache2
+```
+
 ## Beschreibung
 
-Diese Bash-Skripte automatisieren die Installation und Konfiguration von phpMyAdmin auf Ubuntu/Debian-Systemen. Es stehen zwei Versionen zur Verfügung:
+Diese Bash-Skripte automatisieren die Installation und Konfiguration von phpMyAdmin auf Ubuntu/Debian-Systemen. Es stehen drei Versionen zur Verfügung:
 
-- **phpmyadmin8_2.sh**: Installation mit PHP 8.2
-- **phpmyadmin8_3.sh**: Installation mit PHP 8.3 (empfohlen)
+- **phpmyadmin8_2.sh**: Installation mit PHP 8.2 (stabil)
+- **phpmyadmin8_3.sh**: Installation mit PHP 8.3 (empfohlen, stabil)
+- **phpmyadmin8_4.sh**: Installation mit PHP 8.4 (experimentell, nicht getestet)
 
-Beide Skripte installieren alle notwendigen Komponenten einschließlich Apache2, PHP, MariaDB und phpMyAdmin.
+Alle Skripte installieren alle notwendigen Komponenten einschließlich Apache2, PHP, MariaDB und phpMyAdmin.
 
-### PHP 8.3 vs PHP 8.2 - Wichtige Verbesserungen
+### PHP Versionen Vergleich - Wichtige Verbesserungen
 
-#### Performance-Verbesserungen
-- **Bis zu 30% schnellere Ausführung** bei typischen Web-Anwendungen
-- **Verbesserte JIT-Engine** für bessere Performance bei CPU-intensiven Aufgaben
-- **Optimierte Speichernutzung** und reduzierte Memory-Footprints
+#### PHP 8.4 vs PHP 8.3 vs PHP 8.2
 
-#### Neue Features
-- **Typed Class Constants**: Vollständige Typisierung für Klassenkonstanten
-- **Dynamic Class Constant Fetch**: Dynamischer Zugriff auf Klassenkonstanten
-- **Random Extension**: Neue native Random-API für bessere Performance
-- **Improved Type System**: Erweiterte Typisierung und bessere Fehlerbehandlung
+##### Performance-Verbesserungen
+- **PHP 8.4**: Bis zu 40% schnellere Ausführung, neue JIT-Engine, optimierte Speichernutzung
+- **PHP 8.3**: Bis zu 30% schnellere Ausführung, verbesserte JIT-Engine
+- **PHP 8.2**: Standard Performance, stabile JIT-Engine
 
-#### Sicherheitsverbesserungen
-- **Enhanced Security Headers**: Verbesserte HTTP-Sicherheitsheader
-- **Better Input Validation**: Erweiterte Eingabevalidierung
-- **Improved Error Handling**: Bessere Fehlerbehandlung und Logging
+##### Neue Features
+- **PHP 8.4**: Neue JIT-Engine, erweiterte Typisierung, verbesserte Performance-Optimierungen
+- **PHP 8.3**: Typed Class Constants, Dynamic Class Constant Fetch, Random Extension
+- **PHP 8.2**: Grundlegende Features, stabile API
 
-#### Kompatibilität
-- **Backward Compatibility**: Vollständige Abwärtskompatibilität mit PHP 8.2
-- **Deprecation Warnings**: Klarere Warnungen für veraltete Funktionen
-- **Migration Guide**: Einfache Migration von PHP 8.2 zu 8.3
+##### Sicherheitsverbesserungen
+- **PHP 8.4**: Erweiterte Sicherheitsheader, Permissions-Policy, Referrer-Policy
+- **PHP 8.3**: Enhanced Security Headers, Better Input Validation
+- **PHP 8.2**: Standard Sicherheitsfeatures
+
+##### Kompatibilität
+- **PHP 8.4**: Experimentell, nicht vollständig getestet
+- **PHP 8.3**: Vollständige Abwärtskompatibilität mit PHP 8.2
+- **PHP 8.2**: Stabil, bewährt
 
 ## Funktionen
 
@@ -55,6 +75,16 @@ Beide Skripte installieren alle notwendigen Komponenten einschließlich Apache2,
 - **Erweiterte Features**: Bookmarks, Export-Templates, Designer-Settings und mehr
 - **Metro-Design**: Standardmäßig modernes Metro-Design
 - **Detaillierte Logs**: Erweiterte Protokollierung und Statusmeldungen
+
+### phpmyadmin8_4.sh (PHP 8.4) - Experimentell
+- **PHP 8.4 Installation**: Installiert PHP 8.4 mit allen notwendigen Erweiterungen
+- **Erweiterte Sicherheit**: Neue Sicherheitsheader (Permissions-Policy, Referrer-Policy)
+- **Performance-Optimierungen**: MPM Event Module, Gzip-Kompression, Browser-Caching
+- **Konfigurationsspeicher**: Vollständiger phpMyAdmin-Konfigurationsspeicher (pmadb)
+- **Erweiterte Features**: Alle Features von 8.3 plus PHP 8.4-spezifische Optimierungen
+- **Metro-Design**: Standardmäßig modernes Metro-Design
+- **Detaillierte Logs**: Emoji-basierte Statusmeldungen und erweiterte Protokollierung
+- **Apache2-Optimierungen**: Thread-basierte Konfiguration für bessere Performance
 
 ## Voraussetzungen
 
@@ -99,7 +129,24 @@ Beide Skripte installieren alle notwendigen Komponenten einschließlich Apache2,
    ./phpmyadmin8_3.sh
    ```
 
-**Hinweis**: Das PHP 8.3 Skript wird empfohlen, da es erweiterte Sicherheitsfeatures und zusätzliche phpMyAdmin-Funktionen bietet.
+### phpmyadmin8_4.sh (PHP 8.4) - Experimentell
+
+1. **Skript herunterladen**:
+   ```bash
+   wget https://raw.githubusercontent.com/your-repo/phpmyadmin8_4.sh
+   ```
+
+2. **Ausführungsberechtigung erteilen**:
+   ```bash
+   chmod +x phpmyadmin8_4.sh
+   ```
+
+3. **Skript ausführen**:
+   ```bash
+   ./phpmyadmin8_4.sh
+   ```
+
+**Hinweis**: Das PHP 8.3 Skript wird für Produktionsumgebungen empfohlen. PHP 8.4 ist experimentell und sollte nur in Testumgebungen verwendet werden.
 
 ## Was wird installiert
 
@@ -140,6 +187,23 @@ Beide Skripte installieren alle notwendigen Komponenten einschließlich Apache2,
 - php8.3-bz2
 - php8.3-fileinfo
 
+#### phpmyadmin8_4.sh (PHP 8.4)
+- php8.4-cli
+- php8.4-common
+- php8.4-curl
+- php8.4-gd
+- php8.4-intl
+- php8.4-mbstring
+- php8.4-mysql
+- php8.4-opcache
+- php8.4-readline
+- php8.4-xml
+- php8.4-xsl
+- php8.4-zip
+- php8.4-bz2
+- php8.4-fileinfo
+- php8.4-json
+
 ### MariaDB
 - MariaDB Server
 - MariaDB Client
@@ -149,8 +213,9 @@ Beide Skripte installieren alle notwendigen Komponenten einschließlich Apache2,
 - Neueste phpMyAdmin-Version
 - Automatische Apache2-Konfiguration
 - Sicherheitskonfiguration
-- Konfigurationsspeicher (pmadb) - nur 8.3
-- Metro-Design - nur 8.3
+- Konfigurationsspeicher (pmadb) - nur 8.3/8.4
+- Metro-Design - nur 8.3/8.4
+- Performance-Optimierungen - nur 8.4
 
 ## Nach der Installation
 
@@ -177,6 +242,14 @@ http://[IHRE-SERVER-IP]/phpmyadmin
 - **Erweiterte Sicherheit**: Zusätzliche HTTP-Sicherheitsheader
 - **Detaillierte Logs**: Erweiterte Statusmeldungen und Protokollierung
 
+### Zusätzliche Features (nur phpmyadmin8_4.sh)
+- **Konfigurationsspeicher**: Speichert Einstellungen, Bookmarks und Export-Templates
+- **Metro-Design**: Modernes Standard-Design
+- **Erweiterte Sicherheit**: Neue Sicherheitsheader (Permissions-Policy, Referrer-Policy)
+- **Performance-Optimierungen**: MPM Event Module, Gzip-Kompression, Browser-Caching
+- **Detaillierte Logs**: Emoji-basierte Statusmeldungen und erweiterte Protokollierung
+- **Apache2-Optimierungen**: Thread-basierte Konfiguration für bessere Performance
+
 ## Sicherheitshinweise
 
 ### Gemeinsame Sicherheitsfeatures
@@ -190,6 +263,13 @@ http://[IHRE-SERVER-IP]/phpmyadmin
 - **HTTP-Sicherheitsheader**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
 - **Erweiterte Verzeichnisschutz**: Zusätzliche Verzeichnisse werden vor Zugriff geschützt
 - **Sichere Cookie-Verschlüsselung**: Automatisch generierter Blowfish-Secret
+
+### Zusätzliche Sicherheit (phpmyadmin8_4.sh)
+- **MariaDB-Sicherung**: Automatische Konfiguration von MariaDB-Sicherheitseinstellungen
+- **HTTP-Sicherheitsheader**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy
+- **Erweiterte Verzeichnisschutz**: Zusätzliche Verzeichnisse werden vor Zugriff geschützt
+- **Sichere Cookie-Verschlüsselung**: Automatisch generierter Blowfish-Secret
+- **Performance-Sicherheit**: Thread-basierte Apache2-Konfiguration für bessere Sicherheit
 
 ## Troubleshooting
 
@@ -224,6 +304,7 @@ sudo tail -f /var/log/mysql/error.log
 # PHP Logs (je nach Version)
 sudo tail -f /var/log/php8.2-fpm.log  # Für PHP 8.2
 sudo tail -f /var/log/php8.3-fpm.log  # Für PHP 8.3
+sudo tail -f /var/log/php8.4-fpm.log  # Für PHP 8.4
 ```
 
 ## Systemanforderungen
@@ -247,6 +328,7 @@ Bei Problemen oder Fragen erstellen Sie bitte ein Issue im entsprechenden Reposi
 - **PHP 8.3 Changelog**: https://www.php.net/ChangeLog-8.php#8.3.0
 - **PHP 8.2 Changelog**: https://www.php.net/ChangeLog-8.php#8.2.0
 - **PHP Migration Guide**: https://www.php.net/manual/de/migration80.php
+- **PHP Performance Benchmarks**: https://www.php.net/ChangeLog-8.php#8.3.0
 
 ### phpMyAdmin
 - **Offizielle phpMyAdmin Website**: https://www.phpmyadmin.net/
@@ -264,6 +346,17 @@ Bei Problemen oder Fragen erstellen Sie bitte ein Issue im entsprechenden Reposi
 - **Debian Administrator's Handbook**: https://debian-handbook.info/
 
 ## Changelog
+
+### Version 3.0 (phpmyadmin8_4.sh) - Experimentell
+- **PHP 8.4 Support**: Neueste PHP-Version mit experimenteller JIT-Engine
+- **Erweiterte Sicherheit**: Neue Sicherheitsheader (Permissions-Policy, Referrer-Policy)
+- **Performance-Optimierungen**: MPM Event Module, Gzip-Kompression, Browser-Caching
+- **Konfigurationsspeicher**: Vollständiger phpMyAdmin-Konfigurationsspeicher (pmadb)
+- **Metro-Design**: Modernes Standard-Design
+- **Erweiterte Features**: Alle Features von 8.3 plus PHP 8.4-spezifische Optimierungen
+- **Verbesserte Logs**: Emoji-basierte Statusmeldungen und erweiterte Protokollierung
+- **Apache2-Optimierungen**: Thread-basierte Konfiguration für bessere Performance
+- **Sichere Cookie-Verschlüsselung**: Automatisch generierter Blowfish-Secret
 
 ### Version 2.0 (phpmyadmin8_3.sh)
 - **PHP 8.3 Support**: Neueste PHP-Version mit verbesserter Performance
